@@ -15,7 +15,7 @@ class FilmItem extends React.Component{
                     <View 
                     style = { styles.app }
                     >
-                      <Text style={ styles.title }>{film.title }</Text>
+                      <Text style={ styles.title } numberOfLines={6}>{film.title }</Text>
                       <Text style={ styles.date }>{film.release_date }</Text>
                     </View>
             </View>

@@ -32,8 +32,17 @@ class Search extends React.Component{
                 films : [...this.state.films,...data.results],
                 isLoading : false
             })
+            console.log(this.state.films)
          })
 
+        }
+        else{
+            this.page=0
+            this.totalPages = 0
+            this.text=""
+            this.setState( {
+                films : []
+            })
         }
         
     }
