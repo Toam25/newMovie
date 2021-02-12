@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 function GenreFilmItem(props) {
@@ -8,12 +8,19 @@ function GenreFilmItem(props) {
   return (
     <TouchableOpacity
       style={styles.container}
-      onPress={() => navigation.navigate("List", { id: genres.id })}
+      onPress={() =>
+        navigation.navigate("List", { id: genres.id, name: genres.name })
+      }
     >
       <View style={styles.app}>
         <Text style={styles.title} numberOfLines={6}>
           {genres.name}
         </Text>
+        <Image
+          style={styles.image}
+          resizeMode="contain"
+          source={require("../assets/film.png")}
+        />
       </View>
     </TouchableOpacity>
   );
@@ -22,7 +29,7 @@ function GenreFilmItem(props) {
 const styles = StyleSheet.create({
   title: {
     flex: 1,
-    color: "white",
+    color: "#990099",
     fontSize: 20,
     textAlign: "center",
     justifyContent: "center",
@@ -30,10 +37,13 @@ const styles = StyleSheet.create({
     height: "100%",
     width: "100%",
   },
+  image: {
+    flex: 2,
+  },
   container: {
     height: 150,
     borderRadius: 5,
-    shadowColor: "#000",
+    shadowColor: "#81006e",
     shadowOffset: {
       width: 0,
       height: 4,
@@ -44,11 +54,12 @@ const styles = StyleSheet.create({
     elevation: 8,
     margin: "2%",
     width: "46%",
-    backgroundColor: "#92302d",
+    //backgroundColor: "#990099",
   },
   app: {
     flex: 1,
     margin: 5,
+    color: "white",
   },
 });
 

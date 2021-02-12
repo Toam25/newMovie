@@ -1,14 +1,10 @@
 import React from "react";
 import FilmItem from "./FilmItem";
-import {
-  getFilmsFromApiWithSearchedText,
-  getLatestfilms,
-} from "../API/TMDBApi";
+import { getFilmsFromApiWithSearchedText } from "../API/TMDBApi";
 import {
   StyleSheet,
   View,
   TextInput,
-  Button,
   FlatList,
   ActivityIndicator,
 } from "react-native";

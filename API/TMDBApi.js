@@ -37,13 +37,14 @@ export function getGenre() {
     .then((response) => response.json())
     .catch((error) => console.log(error));
 }
-export function getAllMoviePerGenre(id) {
+export function getAllMoviePerGenre(id, page) {
   const url =
-    "https://api.themoviedb.org/" +
-    id +
-    "/genre/movie/list?api_key=" +
+    "https://api.themoviedb.org/3/discover/movie?api_key=" +
     API_TOKEN +
-    "&language=fr-FR";
+    "&language=fr-FR&with_genres=" +
+    id +
+    "&page=" +
+    page;
   return fetch(url)
     .then((response) => response.json())
     .catch((error) => console.log(error));

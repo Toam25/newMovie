@@ -1,7 +1,7 @@
 import React from "react";
 import GenreFilmItem from "./GenreFilmItem";
 import { getGenre } from "../API/TMDBApi";
-import { StyleSheet, View, FlatList, Text } from "react-native";
+import { StyleSheet, View, FlatList, Button } from "react-native";
 class Home extends React.Component {
   constructor(props) {
     super(props);
@@ -29,16 +29,13 @@ class Home extends React.Component {
     this._loadGenreFilms();
   }
   render() {
-    console.log(this.state.date);
     return (
       <View style={styles.main_container}>
         <FlatList
           data={this.state.genre}
           numColumns={2}
           keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item }) => (
-            <GenreFilmItem genres={item} navigations={this.props.navigation} />
-          )}
+          renderItem={({ item }) => <GenreFilmItem genres={item} />}
         />
       </View>
     );
@@ -54,6 +51,11 @@ const styles = StyleSheet.create({
     bottom: 0,
     alignItems: "center",
     justifyContent: "center",
+  },
+  genre: {
+    textAlign: "center",
+    fontSize: 30,
+    color: "#990099",
   },
   container_search: {
     backgroundColor: "#fff",

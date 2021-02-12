@@ -4,6 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import HomeScreen from "./Screen/HomeScreen";
 import ListFilmScreen from "./Screen/ListFilmsScreen";
+import DetailScreen from "./Screen/DetailScreens";
 
 const Stack = createStackNavigator();
 
@@ -11,8 +12,39 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="List" component={ListFilmScreen} />
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{
+            title: "What's the new ",
+            headerStyle: {
+              backgroundColor: "#990099",
+            },
+            headerTintColor: "#fff",
+          }}
+        />
+        <Stack.Screen
+          name="List"
+          component={ListFilmScreen}
+          options={({ route }) => ({
+            title: "Film " + route.params.name.toLowerCase(),
+            headerStyle: {
+              backgroundColor: "#990099",
+            },
+            headerTintColor: "#fff",
+          })}
+        />
+        <Stack.Screen
+          name="Detail"
+          component={DetailScreen}
+          options={({ route }) => ({
+            title: "Detail du film " + route.params.detailfilm.title,
+            headerStyle: {
+              backgroundColor: "#990099",
+            },
+            headerTintColor: "#fff",
+          })}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
