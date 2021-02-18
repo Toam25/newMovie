@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, Image, TouchableOpacity, View, Text } from "react-native";
 import { getImageFilm } from "../API/TMDBApi";
 import { useNavigation } from "@react-navigation/native";
+import FadeInView from "../Components/animation/fadeInView";
 
 export default function FilmItem(props) {
   const film = props.film;

@@ -6,12 +6,13 @@ import {
   Image,
   StyleSheet,
   ScrollView,
+  Dimensions,
   BackHandler,
 } from "react-native";
 import { getImageFilm } from "../API/TMDBApi";
 export default function DetailScreen(props) {
   const film = props.route.params.detailfilm;
-  console.log(film);
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.container_image}>
@@ -65,13 +66,15 @@ const styles = StyleSheet.create({
   },
   container_des: {
     padding: 6,
+    flex: 1,
+    width: Dimensions.get("window").width,
   },
   _container_image_cover: {
     flex: 1,
     justifyContent: "space-around",
     flexDirection: "row",
     alignItems: "center",
-    width: "100%",
+    width: Dimensions.get("window").width,
   },
   vote_average: {
     color: "white",

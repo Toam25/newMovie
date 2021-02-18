@@ -1,13 +1,13 @@
 import React from "react";
 import GenreFilmItem from "./GenreFilmItem";
 import { getGenre } from "../API/TMDBApi";
-import { StyleSheet, View, FlatList, Button } from "react-native";
+import { StyleSheet, View, FlatList, ActivityIndicator } from "react-native";
 class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       genre: [],
-      isLoading: false,
+      isLoading: true,
     };
     this.text = "";
     this.page = 0;
@@ -16,19 +16,29 @@ class Home extends React.Component {
   }
 
   _loadGenreFilms() {
-    this.setState({
-      isLoading: true,
-    });
     getGenre().then((data) => {
       this.setState({
         genre: data.genres,
+        isLoading: false,
       });
     });
   }
   componentDidMount() {
     this._loadGenreFilms();
+    this.setState({
+      isLoading: true,
+    });
+  }
+  _loading() {
+    if (this.state.isLoading)
+      return (
+        <View style={styles.indicator}>
+          <ActivityIndicator size="large" />
+        </View>
+      );
   }
   render() {
+    console.log(this.state.isLoading);
     return (
       <View style={styles.main_container}>
         <FlatList
@@ -37,12 +47,24 @@ class Home extends React.Component {
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => <GenreFilmItem genres={item} />}
         />
+        {this._loading()}
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  indicator: {
+    position: "fixed",
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+    zIndex: 999,
+  },
   loading: {
     position: "absolute",
     left: 0,
