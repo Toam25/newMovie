@@ -11,9 +11,10 @@ export default function NavbarSearch() {
       style={styles.textinput}
       placeholder="Rechercher votre film ici"
       onChangeText={(text) => setSearchedText(text)}
-      onSubmitEditing={() =>
-        navigation.navigate("Search", { text: searchedText })
-      }
+      onSubmitEditing={() => {
+        if (searchedText.trim() !== "")
+          navigation.navigate("Search", { text: searchedText });
+      }}
     />
   );
 }
