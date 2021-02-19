@@ -21,7 +21,6 @@ class Search extends React.Component {
     this.serchedText = "";
   }
 
-  _searchFilms() {}
   _loadFilms() {
     let page = this.page + 1;
     this.setState({
@@ -43,6 +42,7 @@ class Search extends React.Component {
       this.text = "";
       this.setState({
         films: [],
+        isLoading: false,
       });
     }
   }
@@ -58,9 +58,7 @@ class Search extends React.Component {
       );
     }
   }
-  componentWillUnmount() {
-    alert("rado");
-  }
+  componentWillUnmount() {}
   render() {
     return (
       <View style={styles.main_container}>
@@ -77,7 +75,6 @@ class Search extends React.Component {
               },
               this._loadFilms()
             );
-            alert(text);
           }}
         />
 

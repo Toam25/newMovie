@@ -1,10 +1,11 @@
 import * as React from "react";
-import { View, Text, Button } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import HomeScreen from "./Screen/HomeScreen";
 import ListFilmScreen from "./Screen/ListFilmsScreen";
 import DetailScreen from "./Screen/DetailScreens";
+import SearchItem from "./Components/SearchItem";
+import NavbarSearch from "./Components/NavBarSearch";
 
 const Stack = createStackNavigator();
 
@@ -16,12 +17,24 @@ function App() {
           name="Home"
           component={HomeScreen}
           options={{
+            headerTitle: (props) => <NavbarSearch {...props} />,
             title: "What's the new ",
             headerStyle: {
               backgroundColor: "#990099",
             },
             headerTintColor: "#fff",
           }}
+        />
+        <Stack.Screen
+          name="Search"
+          component={SearchItem}
+          options={({ route }) => ({
+            title: "Recherche  " + route.params.text.toLowerCase(),
+            headerStyle: {
+              backgroundColor: "#990099",
+            },
+            headerTintColor: "#fff",
+          })}
         />
         <Stack.Screen
           name="List"

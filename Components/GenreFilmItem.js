@@ -28,22 +28,25 @@ function GenreFilmItem(props) {
 
 const styles = StyleSheet.create({
   title: {
-    flex: 1,
     color: "#990099",
     fontSize: 20,
-    textAlign: "center",
-    justifyContent: "center",
-    alignSelf: "center",
     height: "100%",
     width: "100%",
+    position: "absolute",
+    zIndex: 1,
+    textAlignVertical: "center",
+    textAlign: "center",
   },
   image: {
-    flex: 2,
+    height: "100%",
+    width: "100%",
+    opacity: 0.1,
   },
   container: {
     height: 150,
     borderRadius: 5,
     shadowColor: "#81006e",
+
     shadowOffset: {
       width: 0,
       height: 4,

@@ -18,7 +18,7 @@ export default function FilmItem(props) {
         source={{ uri: getImageFilm(film.poster_path) }}
       />
       <View style={styles.app}>
-        <Text style={styles.title} numberOfLines={6}>
+        <Text style={styles.title} numberOfLines={2}>
           {film.title}
         </Text>
         <Text style={styles.date}>{film.release_date}</Text>

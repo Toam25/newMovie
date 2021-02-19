@@ -9,9 +9,9 @@ import {
 } from "react-native";
 import FilmItem from "../Components/FilmItem";
 
-import { getAllMoviePerGenre } from "../API/TMDBApi";
+import { getFilmsFromApiWithSearchedText } from "../API/TMDBApi";
 
-class ListFilmScreen extends React.Component {
+class SearchItem extends React.Component {
   constructor(props) {
     super(props);
     const { route } = props;
@@ -19,7 +19,7 @@ class ListFilmScreen extends React.Component {
       films: [],
       isLoading: true,
     };
-    this.id = route.params.id;
+    this.text = route.params.text;
     this.page = 0;
     this.totalPages = 0;
   }
@@ -30,7 +30,7 @@ class ListFilmScreen extends React.Component {
     });
 
     if (this.page < this.page + 1)
-      getAllMoviePerGenre(this.id, this.page + 1).then((data) => {
+      getFilmsFromApiWithSearchedText(this.text, this.page + 1).then((data) => {
         this.page = data.page;
         this.totalPages = data.total_pages;
 
@@ -89,4 +89,4 @@ const styles = StyleSheet.create({
     zIndex: 999,
   },
 });
-export default ListFilmScreen;
+export default SearchItem;

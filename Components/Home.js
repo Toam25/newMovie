@@ -1,7 +1,13 @@
 import React from "react";
 import GenreFilmItem from "./GenreFilmItem";
 import { getGenre } from "../API/TMDBApi";
-import { StyleSheet, View, FlatList, ActivityIndicator } from "react-native";
+import {
+  StyleSheet,
+  View,
+  FlatList,
+  Text,
+  ActivityIndicator,
+} from "react-native";
 class Home extends React.Component {
   constructor(props) {
     super(props);
@@ -33,12 +39,11 @@ class Home extends React.Component {
     if (this.state.isLoading)
       return (
         <View style={styles.indicator}>
-          <ActivityIndicator size="large" />
+          <Text style={styles.indicator_text}>En attente des résults ...</Text>
         </View>
       );
   }
   render() {
-    console.log(this.state.isLoading);
     return (
       <View style={styles.main_container}>
         <FlatList
@@ -54,8 +59,14 @@ class Home extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  indicator_text: {
+    backgroundColor: "#990099",
+    color: "white",
+    padding: 5,
+    borderRadius: 20,
+  },
   indicator: {
-    position: "fixed",
+    position: "absolute",
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
