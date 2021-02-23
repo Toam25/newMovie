@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     elevation: 8,
     margin: "2%",
     width: "46%",
-    //backgroundColor: "#990099",
+    backgroundColor: "white",
   },
   app: {
     flex: 1,

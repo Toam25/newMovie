@@ -108,6 +108,7 @@ const styles = StyleSheet.create({
   },
   main_container: {
     flex: 1,
+    backgroundColor: "#550011",
   },
   text_search: {
     padding: 6,
