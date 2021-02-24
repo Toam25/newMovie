@@ -53,7 +53,7 @@ class ListFilmScreen extends React.Component {
   }
   render() {
     return (
-      <View>
+      <View style={styles.main_container}>
         <FlatList
           data={this.state.films}
           numColumns={2}
@@ -71,6 +71,11 @@ class ListFilmScreen extends React.Component {
   }
 }
 const styles = StyleSheet.create({
+  main_container: {
+    flex: 1,
+    backgroundColor: "#0c0011",
+    margin: 0,
+  },
   indicator_text: {
     backgroundColor: "#990099",
     color: "white",

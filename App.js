@@ -9,6 +9,7 @@ import DetailScreen from "./Screen/DetailScreens";
 import SearchItem from "./Components/SearchItem";
 import NavbarSearch from "./Components/NavBarSearch";
 import MeScreen from "./Screen/MeScreen";
+import VideoScreen from "./Screen/VideoScreen";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -22,7 +23,7 @@ function MeStackSreen() {
         options={{
           title: "A propos de moi",
           headerStyle: {
-            backgroundColor: "#990099",
+            backgroundColor: "#0c0011",
           },
           headerTintColor: "#fff",
         }}
@@ -40,7 +41,7 @@ function HomeStackSreen() {
           headerTitle: (props) => <NavbarSearch {...props} />,
           title: "What's the new ",
           headerStyle: {
-            backgroundColor: "#990099",
+            backgroundColor: "#0c0011",
           },
           headerTintColor: "#fff",
         }}
@@ -51,7 +52,7 @@ function HomeStackSreen() {
         options={({ route }) => ({
           title: "Recherche  " + route.params.text.toLowerCase(),
           headerStyle: {
-            backgroundColor: "#990099",
+            backgroundColor: "#0c0011",
           },
           headerTintColor: "#fff",
         })}
@@ -62,7 +63,7 @@ function HomeStackSreen() {
         options={({ route }) => ({
           title: "Film " + route.params.name.toLowerCase(),
           headerStyle: {
-            backgroundColor: "#990099",
+            backgroundColor: "#0c0011",
           },
           headerTintColor: "#fff",
         })}
@@ -73,7 +74,18 @@ function HomeStackSreen() {
         options={({ route }) => ({
           title: "Detail du film " + route.params.detailfilm.title,
           headerStyle: {
-            backgroundColor: "#990099",
+            backgroundColor: "#0c0011",
+          },
+          headerTintColor: "#fff",
+        })}
+      />
+      <Stack.Screen
+        name="Video"
+        component={VideoScreen}
+        options={({ route }) => ({
+          title: "Bande annonce  du film " + route.params.detailfilm.title,
+          headerStyle: {
+            backgroundColor: "#0c0011",
           },
           headerTintColor: "#fff",
         })}
@@ -103,8 +115,9 @@ function App() {
           },
         })}
         tabBarOptions={{
-          activeTintColor: "#990099",
+          activeTintColor: "white",
           inactiveTintColor: "gray",
+          style: { backgroundColor: "#0c0011", borderTopColor: "white" },
         }}
       >
         <Tab.Screen name="HomeStack" component={HomeStackSreen} />
@@ -115,23 +128,3 @@ function App() {
 }
 
 export default App;
-/*import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import Search from './Components/Search'
-
-export default function App() {
-  return (
-   
-      <Search />
-    
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});*/

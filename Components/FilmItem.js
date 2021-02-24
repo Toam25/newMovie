@@ -32,27 +32,29 @@ const styles = StyleSheet.create({
     flex: 2,
   },
   title: {
-    color: "white",
-    fontSize: 20,
+    color: "#0c0013",
+    fontSize: 15,
   },
   date: {
     fontSize: 12,
+    color: "#909090",
   },
   container: {
-    height: 300,
+    height: 200,
     borderRadius: 5,
-    shadowColor: "#000",
+    shadowColor: "white",
     shadowOffset: {
       width: 0,
-      height: 4,
+      height: 12,
     },
-    shadowOpacity: 0.3,
-    shadowRadius: 4.65,
+    shadowOpacity: 0.58,
+    shadowRadius: 16.0,
 
-    elevation: 8,
+    elevation: 24,
     margin: "2%",
     width: "46%",
-    backgroundColor: "#990099",
+    backgroundColor: "white",
+    borderColor: "white",
   },
   app: {
     flex: 1,

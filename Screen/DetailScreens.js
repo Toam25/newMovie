@@ -7,67 +7,82 @@ import {
   StyleSheet,
   ScrollView,
   Dimensions,
-  BackHandler,
+  ImageBackground,
+  TouchableOpacity,
 } from "react-native";
 import { getImageFilm } from "../API/TMDBApi";
+import { useNavigation } from "@react-navigation/native";
 export default function DetailScreen(props) {
   const film = props.route.params.detailfilm;
+  const navigation = useNavigation();
 
   return (
     <ScrollView style={styles.container}>
-      <View style={styles.container_image}>
-        <Image
-          resizeMode="cover"
-          style={styles.image}
-          source={{ uri: getImageFilm(film.backdrop_path) }}
-        />
-      </View>
-      <View style={styles.container_image_cover}>
-        <View style={styles._container_image_cover}>
-          <Text style={styles.vote_average}>{film.vote_count}</Text>
-          <Image
-            resizeMode="cover"
-            style={styles.image_cover}
-            source={{ uri: getImageFilm(film.poster_path) }}
-          />
-          <Text style={styles.vote_average}>{film.vote_average}</Text>
+      <ImageBackground
+        source={{ uri: getImageFilm(film.backdrop_path) }}
+        style={styles.image}
+      >
+        <View style={styles.container_image_cover}>
+          <View style={styles._container_image_cover}>
+            <Text style={styles.vote_average}>{film.vote_count}</Text>
+            <Image
+              resizeMode="cover"
+              style={styles.image_cover}
+              source={{ uri: getImageFilm(film.poster_path) }}
+            />
+            <Text style={styles.vote_average}>{film.vote_average}</Text>
+          </View>
+          <View style={styles.container_des}>
+            <Text style={styles.title}>{film.title}</Text>
+            <Text style={styles.white}>
+              <Text style={styles.bold}>Titre original : </Text>
+              {film.original_title}
+            </Text>
+            <Text style={styles.white}>
+              <Text style={styles.bold}>Votes moyenne : </Text>
+              {film.vote_average}
+            </Text>
+            <Text style={styles.white}>
+              <Text style={styles.bold}>Décompte des votes : </Text>
+              {film.vote_count}
+            </Text>
+            <Text style={styles.white}>
+              <Text style={styles.bold}>Date de sortie : </Text>
+              {film.release_date}
+            </Text>
+            <Text style={styles.white}>
+              <Text style={styles.bold}>Déscription : </Text>
+              {film.overview}
+            </Text>
+          </View>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Video", { detailfilm: film })}
+          >
+            <Text style={styles.bande_annonce}>Bande annonce</Text>
+          </TouchableOpacity>
         </View>
-        <View style={styles.container_des}>
-          <Text style={styles.title}>{film.title}</Text>
-          <Text>
-            <Text style={styles.bold}>Titre original : </Text>
-            {film.original_title}
-          </Text>
-          <Text>
-            <Text style={styles.bold}>Votes moyenne : </Text>
-            {film.vote_average}
-          </Text>
-          <Text>
-            <Text style={styles.bold}>Décompte des votes : </Text>
-            {film.vote_count}
-          </Text>
-          <Text>
-            <Text style={styles.bold}>Date de sortie : </Text>
-            {film.release_date}
-          </Text>
-          <Text>
-            <Text style={styles.bold}>Déscription : </Text>
-            {film.overview}
-          </Text>
-        </View>
-      </View>
+      </ImageBackground>
     </ScrollView>
   );
 }
 const styles = StyleSheet.create({
   image: {
     flex: 1,
-    height: 400,
+    resizeMode: "cover",
+    justifyContent: "center",
+  },
+  bande_annonce: {
+    color: "white",
+    alignItems: "center",
+  },
+  white: {
+    color: "white",
   },
   container_des: {
     padding: 6,
     flex: 1,
     width: Dimensions.get("window").width,
+    color: "white",
   },
   _container_image_cover: {
     justifyContent: "space-around",
@@ -82,15 +97,15 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   container_image_cover: {
-    top: -100,
     justifyContent: "center",
     alignItems: "center",
     width: "100%",
     height: "100%",
+    backgroundColor: "rgba(12,0,17,0.9)",
   },
   bold: {
-    fontWeight: "bold",
     fontSize: 18,
+    color: "white",
   },
   image_cover: {
     height: 200,
@@ -102,7 +117,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: "#990099",
+    backgroundColor: "#0c0011",
   },
   title: {
     fontWeight: "bold",

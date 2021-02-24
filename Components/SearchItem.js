@@ -53,7 +53,7 @@ class SearchItem extends React.Component {
   }
   render() {
     return (
-      <View>
+      <View style={styles.main_container}>
         <FlatList
           data={this.state.films}
           numColumns={2}
@@ -72,10 +72,15 @@ class SearchItem extends React.Component {
 }
 const styles = StyleSheet.create({
   indicator_text: {
-    backgroundColor: "#990099",
+    backgroundColor: "#0c0011",
     color: "white",
     padding: 5,
     borderRadius: 20,
+  },
+  main_container: {
+    flex: 1,
+    backgroundColor: "#0c0011",
+    margin: 0,
   },
   indicator: {
     position: "absolute",

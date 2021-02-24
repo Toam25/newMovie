@@ -15,7 +15,7 @@ class MeScreen extends React.Component {
   render() {
     return (
       <View style={styles.main_container}>
-        <Text>
+        <Text style={styles.text}>
           Application dévélopper par Rakotoarimanana Rado Nirina, contactez-moi
           sur{" "}
           <Text style={styles.title} onPress={this._goToURL}>
@@ -31,14 +31,18 @@ class MeScreen extends React.Component {
 
 const styles = StyleSheet.create({
   title: {
-    color: "#0000ff",
+    color: "#5f5bff",
     fontWeight: "bold",
+  },
+  text: {
+    color: "white",
   },
   main_container: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
     padding: 20,
+    backgroundColor: "#0c0011",
   },
 });
 export default MeScreen;
