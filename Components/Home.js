@@ -5,7 +5,6 @@ import {
   getGenre,
   getLatestfilms,
   getDiscoverFilm,
-  getPopularFilm,
   getTopRatedFilm,
   getUnComing,
 } from "../API/TMDBApi";
@@ -16,7 +15,7 @@ class Home extends React.Component {
     super(props);
     this.state = {
       genre: [],
-      popular: [],
+      uncoming: [],
       decouvrir: [],
       meilleurVote: [],
       dernierfilms: [],
@@ -24,7 +23,19 @@ class Home extends React.Component {
     };
     this.text = "";
     this.page = 0;
-    this.totalPages = 0;
+
+    this.pageDecouvrir = 0;
+    this.totalPagesDecouvrir = 0;
+
+    this.pageUncomming = 0;
+    this.totalPagesUncomming = 0;
+
+    this.pageTopVote = 0;
+    this.totalPagesVote = 0;
+
+    this.dernierFilm = 0;
+    this.totalPagesDernierFilm = 0;
+
     this.serchedText = "";
   }
 
@@ -37,33 +48,41 @@ class Home extends React.Component {
     });
   }
   _loadUnComingFilm() {
-    getUnComing().then((data) => {
+    getUnComing(this.pageUncomming + 1).then((data) => {
+      this.pageUncomming = data.page;
+      this.totalPagesUncomming = data.total_pages;
       this.setState({
-        popular: data.results,
+        uncoming: data.results,
         isLoading: false,
       });
     });
   }
   _loadDecouvrirFilms() {
-    getDiscoverFilm().then((data) => {
+    getDiscoverFilm(this.pageDecouvrir + 1).then((data) => {
+      this.pageDecouvrir = data.page;
+      this.totalPages = data.total_pages;
       this.setState({
-        decouvrir: data.results,
+        decouvrir: [...this.state.decouvrir, ...data.results],
         isLoading: false,
       });
     });
   }
   _loadTopVoteFilms() {
-    getTopRatedFilm().then((data) => {
+    getTopRatedFilm(this.pageTopVote + 1).then((data) => {
+      this.pageTopVote = data.page;
+      this.totalPagesVote = data.total_pages;
       this.setState({
-        meilleurVote: data.results,
+        meilleurVote: [...this.state.meilleurVote, ...data.results],
         isLoading: false,
       });
     });
   }
   _loadDernierFilm() {
-    getLatestfilms().then((data) => {
+    getLatestfilms(this.dernierFilm + 1).then((data) => {
+      this.dernierFilm = data.page;
+      this.totalPagesDernierFilm = data.total_pages;
       this.setState({
-        dernierfilms: data.results,
+        dernierfilms: [...this.state.dernierfilms, ...data.results],
         isLoading: false,
       });
     });
@@ -91,6 +110,7 @@ class Home extends React.Component {
   render() {
     return (
       <ScrollView style={styles.main_container}>
+        {this._loading()}
         <View>
           <FlatList
             data={this.state.genre}
@@ -108,8 +128,8 @@ class Home extends React.Component {
             onEndReachedThreshold={0.5}
             onEndReached={() => {
               if (
-                this.state.dernierfilms.length > 0 &&
-                this.page < this.totalPages
+                this.state.decouvrir.length > 0 &&
+                this.decouvrir < this.totalPagesDecouvrir
               )
                 this._loadDecouvrirFilms();
             }}
@@ -121,12 +141,15 @@ class Home extends React.Component {
         <View style={styles.containt_ech}>
           <Text style={styles.title}>Prochainement</Text>
           <FlatList
-            data={this.state.popular}
+            data={this.state.uncoming}
             horizontal={true}
             keyExtractor={(item) => item.id.toString()}
             onEndReachedThreshold={0.5}
             onEndReached={() => {
-              if (this.state.popular.length > 0 && this.page < this.totalPages)
+              if (
+                this.state.uncoming.length > 0 &&
+                this.pageUncomming < this.totalPagesUncomming
+              )
                 this._loadUnComingFilm();
             }}
             renderItem={({ item }) => <TypeFilmItem films={item} />}
@@ -143,7 +166,7 @@ class Home extends React.Component {
             onEndReached={() => {
               if (
                 this.state.dernierfilms.length > 0 &&
-                this.page < this.totalPages
+                this.dernierfilms < this.totalPagesDernierFilm
               )
                 this._loadDernierFilm();
             }}
@@ -160,14 +183,13 @@ class Home extends React.Component {
             onEndReached={() => {
               if (
                 this.state.meilleurVote.length > 0 &&
-                this.page < this.totalPages
+                this.pageTopVote < this.totalPagesVote
               )
                 this._loadTopVoteFilms();
             }}
             renderItem={({ item }) => <TypeFilmItem films={item} />}
           />
         </View>
-        {this._loading()}
       </ScrollView>
     );
   }

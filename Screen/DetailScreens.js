@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import { getImageFilm } from "../API/TMDBApi";
 import { useNavigation } from "@react-navigation/native";
+import Ionicons from "react-native-vector-icons/Ionicons";
 export default function DetailScreen(props) {
   const film = props.route.params.detailfilm;
   const navigation = useNavigation();
@@ -30,6 +31,12 @@ export default function DetailScreen(props) {
               style={styles.image_cover}
               source={{ uri: getImageFilm(film.poster_path) }}
             />
+            <TouchableOpacity
+              style={styles.play}
+              onPress={() => navigation.navigate("Video", { detailfilm: film })}
+            >
+              <Ionicons name="play-outline" style={styles.bold} />
+            </TouchableOpacity>
             <Text style={styles.vote_average}>{film.vote_average}</Text>
           </View>
           <View style={styles.container_des}>
@@ -55,11 +62,6 @@ export default function DetailScreen(props) {
               {film.overview}
             </Text>
           </View>
-          <TouchableOpacity
-            onPress={() => navigation.navigate("Video", { detailfilm: film })}
-          >
-            <Text style={styles.bande_annonce}>Bande annonce</Text>
-          </TouchableOpacity>
         </View>
       </ImageBackground>
     </ScrollView>
@@ -78,6 +80,18 @@ const styles = StyleSheet.create({
   white: {
     color: "white",
   },
+  play: {
+    backgroundColor: "rgba(12,0,17,1)",
+    padding: 15,
+    position: "absolute",
+    zIndex: 6,
+    flex: 1,
+    right: 85,
+    bottom: -10,
+    borderRadius: 100,
+    borderColor: "white",
+    borderWidth: 1,
+  },
   container_des: {
     padding: 6,
     flex: 1,
@@ -89,6 +103,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     width: Dimensions.get("window").width,
+    position: "relative",
   },
   vote_average: {
     color: "white",

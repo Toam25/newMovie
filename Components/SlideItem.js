@@ -68,7 +68,7 @@ export default class Slide extends React.Component {
 }
 const styles = StyleSheet.create({
   indicator_text: {
-    backgroundColor: "#0c0011",
+    backgroundColor: "#990099",
     color: "white",
     padding: 5,
     borderRadius: 20,
